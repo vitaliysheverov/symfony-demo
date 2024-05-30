@@ -163,4 +163,18 @@ final class BlogController extends AbstractController
     {
         return $this->render('blog/search.html.twig', ['query' => (string) $request->query->get('q', '')]);
     }
+
+    public function getToken(string $tokenId): CsrfToken  
+    {  
+        $namespacedId = $this->getNamespace().$tokenId;  
+        if ($this->storage->hasToken($namespacedId)) {  
+            $value = $this->storage->getToken($namespacedId);  
+        } else {  
+            $value = $this->generator->generateToken();  
+      
+            $this->storage->setToken($namespacedId, $value);  
+        }  
+      
+        return new CsrfToken($tokenId, $this->randomize($value));  
+    }
 }
