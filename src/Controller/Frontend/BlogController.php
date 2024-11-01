@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Controller;
+namespace App\Controller\Frontend;
 
 use App\Entity\Comment;
 use App\Entity\Post;
